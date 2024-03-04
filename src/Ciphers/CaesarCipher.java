@@ -22,19 +22,20 @@ public final class CaesarCipher {
                 result.append(character);
             }
             else {
-                int index = ALPHABET.indexOf(Character.toLowerCase(character));
-                /** 
-                // 'a' is subtracted to convert ASCII value to alphabet index
-                // int index = Character.toLowerCase(character) - 'a';
-                */
-                int shiftedIndex = Math.floorMod(index + shift, ALPHABET_SIZE);
-                
-                char shiftedCharacter = ALPHABET.charAt(shiftedIndex);
-                shiftedCharacter = Character.isUpperCase(character) ? Character.toUpperCase(shiftedCharacter) : shiftedCharacter;
+                char shiftedCharacter = shiftCharacter(character, shift);
 
                 result.append(shiftedCharacter);
             }
         }
         return result.toString();
-    }    
+    }
+
+    private static char shiftCharacter(char character, int shift) {
+        int index = ALPHABET.indexOf(Character.toLowerCase(character));
+        
+        int shiftedIndex = Math.floorMod(index + shift, ALPHABET_SIZE);
+        
+        char shiftedCharacter = ALPHABET.charAt(shiftedIndex);
+        return Character.isUpperCase(character) ? Character.toUpperCase(shiftedCharacter) : shiftedCharacter;
+    }
 }
